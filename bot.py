@@ -1,20 +1,30 @@
 import discord
 import os
 from dotenv import load_dotenv
+from response import get_response
+
+COMMAND_PREFIX = "!"
 
 
-async def send_message(message, user_message, is_private):
+async def send_message(channel, response_content, files):
     try:
-        await message.channel.send("Under Development")
-    except Exception:
+        await channel.send(content=response_content, files=files)
+    except Exception as e:
+        print(e)
         pass
+
+
+def setup_intents():
+    intents = discord.Intents.default()
+    intents.message_content = True
+    return intents
 
 
 def run_discord_bot():
     load_dotenv()
     token = os.getenv("TOKEN")
-    client = discord.Client(intents=discord.Intents.default())
-    print(token)
+    intents = setup_intents()
+    client = discord.Client(intents=intents)
 
     @client.event
     async def on_ready():
@@ -25,6 +35,14 @@ def run_discord_bot():
         if message.author == client.user:
             return
 
-        await send_message(message, "", False)
+        print(f"content: {message.content}")
+
+        if not message.content.startswith(COMMAND_PREFIX):
+            return
+
+        content = message.content[1:]
+        response_content, files = get_response(content)
+
+        await send_message(message.channel, response_content, files)
 
     client.run(token)
