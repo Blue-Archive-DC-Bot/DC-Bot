@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 discord = "==2.3.2"
 python-dotenv = "==1.0.0"
+requests = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 pre-commit = "*"

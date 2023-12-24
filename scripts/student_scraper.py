@@ -26,7 +26,7 @@ for row in rows:
     student_img_src = student_img_element.get("data-src")
     response = requests.get(student_img_src)
 
-    with open(f"../data/char image/{data['student']}.png", "wb") as f:
+    with open(f"data/char image/{data['student']}.png", "wb") as f:
         f.write(response.content)
 
     # Parse rarity
@@ -64,5 +64,5 @@ for row in rows:
 for i in range(10):
     print(students_data[i])
 
-with open("../data/students.json", "w") as f:
+with open("data/students.json", "w") as f:
     json.dump(students_data, f)
