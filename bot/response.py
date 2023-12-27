@@ -1,36 +1,8 @@
-from discord import File
-import json
+import command as handler
 
 
 def clean_command_details(detail):
     return " ".join(detail.split())
-
-
-def handle_char_command(detail):
-    detail = clean_command_details(detail)
-    with open("data/students.json") as f:
-        students = json.load(f)
-
-    for data in students:
-        if data["student"].lower() != detail:
-            continue
-        variants = data["variants"]
-        has_variants = len(variants) > 0
-        message_content = f"""Name: {data['student']}
-Rarity: {data['rarity']}*
-Role: {data['role']}
-Class: {data['class']}
-Position: {data['position']}
-ATK Type: {data['ATK type']}
-DEF Type: {data['DEF type']}
-Variants: {', '.join(variants) if has_variants else 'None'}
-        """
-
-        file = File(f"data/char image/{data['student']}.png")
-
-        return message_content, [file]
-
-    return "Char Not Found", []
 
 
 def get_response(content):
@@ -45,9 +17,10 @@ def get_response(content):
         return DEFAULT_RESPONSE
 
     command, detail = splitted
+    detail = clean_command_details(detail)
 
     match command:
         case "char":
-            return handle_char_command(detail)
+            return handler.handle_char_command(detail)
         case _:
             return DEFAULT_RESPONSE
