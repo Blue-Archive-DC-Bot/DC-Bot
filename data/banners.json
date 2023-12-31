@@ -4,7 +4,7 @@
     "students": [
       {
         "name": "Miyu",
-        "remarks": "Skip"
+        "remarks": ["Skip"]
       },
       {
         "name": "Moe",
@@ -17,7 +17,7 @@
     "students": [
       {
         "name": "Miyako Swimsuit",
-        "remarks": "PVP"
+        "remarks": ["PVP"]
       },
       {
         "name": "Saki Swimsuit",
