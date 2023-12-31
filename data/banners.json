@@ -1,0 +1,58 @@
+[
+  {
+    "date": "2023-Dec-19",
+    "students": [
+      {
+        "name": "Miyu",
+        "remarks": "Skip"
+      },
+      {
+        "name": "Moe",
+        "remarks": ["Chesed", "AOE"]
+      }
+    ]
+  },
+  {
+    "date": "2023-Dec-26",
+    "students": [
+      {
+        "name": "Miyako Swimsuit",
+        "remarks": "PVP"
+      },
+      {
+        "name": "Saki Swimsuit",
+        "remarks": ["Debuff", "Striker Sub Slave"]
+      }
+    ]
+  },
+  {
+    "date": "2024-Jan-09",
+    "students": [
+      {
+        "name": "Hina Swimsuit",
+        "remarks": ["Kaiten", "PVP", "Limited"]
+      },
+      {
+        "name": "Iori Swimsuit",
+        "remarks": ["DPS", "PVP", "Limited"]
+      }
+    ]
+  },
+  {
+    "date": "2024-Jan-16",
+    "students": [
+      {
+        "name": "Shiroko Swimsuit",
+        "remarks": ["Cost", "PVP", "Def Debuff"]
+      },
+      {
+        "name": "Nonomi Swimsuit",
+        "remarks": ["DPS"]
+      },
+      {
+        "name": "Wakamo Swimsuit",
+        "remarks": ["Hod"]
+      }
+    ]
+  }
+]
