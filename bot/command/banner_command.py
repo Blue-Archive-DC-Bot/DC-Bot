@@ -15,8 +15,7 @@ def load_banner_data():
 
 def filter_past_banner(banners):
     current_time = datetime.now()
-
-    past_banners = [b for b in banners if b["date"] > current_time][:-1]
+    past_banners = [b for b in banners if b["date"] <= current_time][:-1]
     current_banners = banners[len(past_banners) :]
 
     return current_banners
