@@ -1,46 +1,59 @@
 from discord import File
+from .command import Command
 import json
 
 
-def get_matching_student(query):
-    """
-    Return student where query is a prefix of the students name.
-    If there are multiple, return the student with shortest name.
-    Otherwise returns None.
-    """
-    with open("data/students.json") as f:
-        students = json.load(f)
+class CharCommand(Command):
+    @staticmethod
+    def handle_command(detail):
+        if detail is None:
+            return "Invalid Command Format", []
 
-    matched = []
+        student = CharCommand.get_matching_student(query=detail)
 
-    for stu in students:
-        if stu["student"].lower().startswith(query):
-            matched.append(stu)
+        if student is None:
+            return "Char Not Found", []
 
-    if len(matched) == 0:
-        return None
+        message_content = CharCommand.format_student_info(student)
 
-    return min(matched, key=lambda s: len(s["student"]))
+        file = File(f"data/char image/{student['student']}.png")
 
+        return message_content, [file]
 
-def handle_char_command(detail):
-    student = get_matching_student(query=detail)
+    @staticmethod
+    def get_matching_student(query):
+        """
+        Return student where query is a prefix of the students name.
+        If there are multiple, return the student with shortest name.
+        Otherwise returns None.
+        """
+        with open("data/students.json") as f:
+            students = json.load(f)
 
-    if student is None:
-        return "Char Not Found", []
+        matched = []
 
-    variants = student["variants"]
-    has_variants = len(variants) > 0
-    message_content = f"""Name: {student['student']}
-Rarity: {student['rarity']}*
-Role: {student['role']}
-Class: {student['class']}
-Position: {student['position']}
-ATK Type: {student['ATK type']}
-DEF Type: {student['DEF type']}
-Variants: {', '.join(variants) if has_variants else 'None'}
-    """
+        for stu in students:
+            if stu["student"].lower().startswith(query):
+                matched.append(stu)
 
-    file = File(f"data/char image/{student['student']}.png")
+        if len(matched) == 0:
+            return None
 
-    return message_content, [file]
+        return min(matched, key=lambda s: len(s["student"]))
+
+    @staticmethod
+    def format_student_info(student):
+        if student["variants"]:
+            variant_details = ", ".join(student["variants"])
+        else:
+            variant_details = "None"
+        return (
+            f"Name: {student['student']}\n"
+            f"Rarity: {student['rarity']}*\n"
+            f"Role: {student['role']}\n"
+            f"Class: {student['class']}\n"
+            f"Position: {student['position']}\n"
+            f"ATK Type: {student['ATK type']}\n"
+            f"DEF Type: {student['DEF type']}\n"
+            f"Variants: {variant_details}\n"
+        )

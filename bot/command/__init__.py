@@ -1,2 +1,16 @@
-from .char_command import handle_char_command
-from .banner_command import handle_banner_command
+from .char_command import CharCommand
+from .banner_command import BannerCommand
+from typing import Optional, List
+from discord import File
+
+
+def get_command_response(command: str, detail: Optional[str]) -> tuple[str, List[int]]:
+    DEFAULT_RESPONSE = ("Invalid Command", [])
+
+    match command:
+        case "char":
+            return CharCommand.handle_command(detail)
+        case "banner":
+            return BannerCommand.handle_command(detail)
+        case _:
+            return DEFAULT_RESPONSE

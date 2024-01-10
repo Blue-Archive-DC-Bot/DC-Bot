@@ -1,4 +1,4 @@
-import command as handler
+from command import get_command_response
 
 
 def clean_command_details(detail):
@@ -22,16 +22,6 @@ def get_response(content):
     """
     Returns message content, list of files to send
     """
-    DEFAULT_RESPONSE = ("Invalid Command", [])
 
     command, detail = parse_content(content)
-
-    match command:
-        case "char":
-            if detail is None:
-                return DEFAULT_RESPONSE
-            return handler.handle_char_command(detail)
-        case "banner":
-            return handler.handle_banner_command()
-        case _:
-            return DEFAULT_RESPONSE
+    return get_command_response(command, detail)
