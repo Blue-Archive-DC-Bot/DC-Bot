@@ -4,6 +4,8 @@ import json
 
 
 class CharCommand(Command):
+    COMMAND_SIGNATURE = "char"
+
     @staticmethod
     def handle_command(detail):
         if detail is None:

@@ -4,6 +4,8 @@ import json
 
 
 class BossCommand(Command):
+    COMMAND_SIGNATURE = "boss"
+
     @staticmethod
     def handle_command(detail):
         if detail is None:

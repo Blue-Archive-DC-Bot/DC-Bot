@@ -4,6 +4,8 @@ from .command import Command
 
 
 class BannerCommand(Command):
+    COMMAND_SIGNATURE = "banner"
+
     @staticmethod
     def handle_command(_):
         banners = BannerCommand.load_banner_data()
