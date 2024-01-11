@@ -1,6 +1,7 @@
 from .char_command import CharCommand
 from .banner_command import BannerCommand
 from .boss_command import BossCommand
+from .help_command import HelpCommand
 from typing import Optional, List
 from discord import File
 
@@ -15,5 +16,7 @@ def get_command_response(command: str, detail: Optional[str]) -> tuple[str, List
             return BannerCommand.handle_command(detail)
         case BossCommand.COMMAND_SIGNATURE:
             return BossCommand.handle_command(detail)
+        case HelpCommand.COMMAND_SIGNATURE:
+            return HelpCommand.handle_command(detail)
         case _:
             return DEFAULT_RESPONSE

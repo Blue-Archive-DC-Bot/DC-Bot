@@ -7,6 +7,13 @@ class BossCommand(Command):
     COMMAND_SIGNATURE = "boss"
 
     @staticmethod
+    def command_usage():
+        return (
+            f"Usage: {BossCommand.COMMAND_SIGNATURE} [query]\n"
+            "Returns a boss detail whose name starts with query."
+        )
+
+    @staticmethod
     def handle_command(detail):
         if detail is None:
             return "Invalid Command Format", []

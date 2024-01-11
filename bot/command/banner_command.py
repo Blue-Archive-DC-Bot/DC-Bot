@@ -7,6 +7,13 @@ class BannerCommand(Command):
     COMMAND_SIGNATURE = "banner"
 
     @staticmethod
+    def command_usage():
+        return (
+            f"Usage: !{BannerCommand.COMMAND_SIGNATURE}\n:"
+            "Returns the currently ongoing and upcoming banners."
+        )
+
+    @staticmethod
     def handle_command(_):
         banners = BannerCommand.load_banner_data()
         banners = BannerCommand.filter_past_banner(banners)
